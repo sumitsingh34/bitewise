@@ -42,7 +42,7 @@ BiteWise is a web app that installs on an Android phone like a normal app. Every
 Open the app's GitHub Pages address in Chrome on your phone:
 
 ```
-https://sumitsingh34.github.io/desktop-tutorial/
+https://sumitsingh34.github.io/bitewise/
 ```
 
 Then tap **⋮ → Add to Home screen** (or **Install app**). BiteWise opens from your home screen like any other app.
