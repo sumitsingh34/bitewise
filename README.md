@@ -1,9 +1,9 @@
-# MeraFood
+# BiteWise
 
 A simple, personal calorie and nutrition tracker for meals, exercise, water and weight.
 No accounts, no ads, no AI. Just see what you eat.
 
-MeraFood is a web app that installs on an Android phone like a normal app. Everything you log is stored on your own phone.
+BiteWise is a web app that installs on an Android phone like a normal app. Everything you log is stored on your own phone.
 
 ## Features
 
@@ -45,7 +45,7 @@ Open the app's GitHub Pages address in Chrome on your phone:
 https://sumitsingh34.github.io/desktop-tutorial/
 ```
 
-Then tap **⋮ → Add to Home screen** (or **Install app**). MeraFood opens from your home screen like any other app.
+Then tap **⋮ → Add to Home screen** (or **Install app**). BiteWise opens from your home screen like any other app.
 
 The first time you scan a barcode, allow camera access when Chrome asks.
 
@@ -64,10 +64,10 @@ There is no build step and nothing to install. The app runs directly from these 
 
 1. Replace the changed files in this repository and commit.
 2. Wait a few minutes for GitHub Pages to update.
-3. Close MeraFood on the phone and open it again, once or twice.
+3. Close BiteWise on the phone and open it again, once or twice.
 4. Check **Settings** (bottom of the screen) for the version number.
 
-To see a new home screen icon, remove MeraFood from the home screen and add it again from Chrome. Logged data is not affected.
+To see a new home screen icon, remove BiteWise from the home screen and add it again from Chrome. Logged data is not affected.
 
 ## Your data
 
@@ -83,4 +83,4 @@ To see a new home screen icon, remove MeraFood from the home screen and add it a
 
 ## Disclaimer
 
-MeraFood is a personal tracking tool, not medical or nutrition advice. Calorie and exercise numbers are estimates. For personal targets, especially with a health condition, talk to a doctor or registered dietitian.
+BiteWise is a personal tracking tool, not medical or nutrition advice. Calorie and exercise numbers are estimates. For personal targets, especially with a health condition, talk to a doctor or registered dietitian.

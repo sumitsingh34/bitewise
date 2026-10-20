@@ -1,5 +1,5 @@
-// MeraFood service worker: lets the app open offline.
-const CACHE = "merafood-v23";
+// BiteWise service worker: lets the app open offline.
+const CACHE = "bitewise-v24";
 const SHELL = ["./", "./index.html", "./manifest.json", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", e => {

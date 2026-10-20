@@ -1,6 +1,6 @@
 {
-  "name": "MeraFood",
-  "short_name": "MeraFood",
+  "name": "BiteWise",
+  "short_name": "BiteWise",
   "description": "Track your food, calories and exercise.",
   "start_url": "./",
   "scope": "./",
