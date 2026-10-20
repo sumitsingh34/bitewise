@@ -1,6 +1,8 @@
 // BiteWise service worker: lets the app open offline.
-const CACHE = "bitewise-v24";
-const SHELL = ["./", "./index.html", "./manifest.json", "./icon-192.png", "./icon-512.png"];
+const CACHE = "bitewise-v25";
+const SHELL = ["./", "./index.html", "./manifest.json", "./icon-192.png", "./icon-512.png",
+  "./vendor/html5-qrcode/html5-qrcode.min.js",
+  "./vendor/archivo/archivo-latin-wdth-normal.woff2", "./vendor/archivo/archivo-latin-ext-wdth-normal.woff2"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
@@ -22,7 +24,7 @@ self.addEventListener("fetch", e => {
   const net = url.origin === location.origin ? fetch(url.href, { cache: "no-cache" }) : fetch(req);
   e.respondWith(
     net.then(res => {
-      if (res.ok && (url.origin === location.origin || url.hostname.includes("jsdelivr") || url.hostname.includes("gstatic") || url.hostname.includes("googleapis"))) {
+      if (res.ok && url.origin === location.origin) {
         const copy = res.clone();
         caches.open(CACHE).then(c => c.put(req, copy));
       }

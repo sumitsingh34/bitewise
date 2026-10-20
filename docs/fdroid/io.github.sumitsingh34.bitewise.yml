@@ -1,0 +1,25 @@
+Categories:
+  - Diet
+  - Health Manager
+License: GPL-3.0-or-later
+AuthorName: Sumit Singh
+SourceCode: https://github.com/sumitsingh34/bitewise
+IssueTracker: https://github.com/sumitsingh34/bitewise/issues
+
+AutoName: BiteWise
+
+RepoType: git
+Repo: https://github.com/sumitsingh34/bitewise.git
+
+Builds:
+  - versionName: '25'
+    versionCode: 25
+    commit: v25
+    subdir: android/app
+    gradle:
+      - yes
+
+AutoUpdateMode: Version
+UpdateCheckMode: Tags
+CurrentVersion: '25'
+CurrentVersionCode: 25

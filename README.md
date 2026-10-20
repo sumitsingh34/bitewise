@@ -49,6 +49,12 @@ Then tap **⋮ → Add to Home screen** (or **Install app**). BiteWise opens fro
 
 The first time you scan a barcode, allow camera access when Chrome asks.
 
+### Android app (F-Droid)
+
+The same app is also packaged as a normal Android app in the `android/` folder, for F-Droid. It bundles these web files inside the APK, so it works offline and never loads the app from the internet.
+
+Data in the Chrome version and the Android app are kept separately. To move your logs, use **Settings → Export backup** in one and **Import backup** in the other.
+
 ## Files
 
 | File | What it is |
@@ -57,8 +63,12 @@ The first time you scan a barcode, allow camera access when Chrome asks.
 | `sw.js` | Service worker, lets the app open offline and pick up updates |
 | `manifest.json` | App name, colors and icons, so it can be installed |
 | `icon-192.png`, `icon-512.png` | Home screen icons |
+| `vendor/` | Barcode scanner library (html5-qrcode, Apache-2.0) and the Archivo font (SIL OFL 1.1), kept here so nothing loads from a CDN |
+| `android/` | The Android app for F-Droid: a small WebView wrapper that bundles the files above |
+| `fastlane/` | F-Droid store listing: descriptions, icon, screenshots, changelogs |
+| `docs/fdroid/` | How to publish on F-Droid, and the F-Droid metadata file |
 
-There is no build step and nothing to install. The app runs directly from these files.
+There is no build step and nothing to install. The web app runs directly from these files.
 
 ## Updating the app
 
@@ -69,9 +79,26 @@ There is no build step and nothing to install. The app runs directly from these 
 
 To see a new home screen icon, remove BiteWise from the home screen and add it again from Chrome. Logged data is not affected.
 
+### Releasing a new Android version
+
+The version number lives in three places. Bump all three together:
+
+1. `index.html`: "BiteWise version N" in Settings.
+2. `sw.js`: `CACHE = "bitewise-vN"`.
+3. `android/app/build.gradle.kts`: `versionCode = N` and `versionName = "N"`.
+
+Then add `fastlane/metadata/android/en-US/changelogs/N.txt` (what changed, under 500 characters), commit, and tag the commit `vN`:
+
+```
+git tag vN
+git push origin main --tags
+```
+
+F-Droid checks for new tags and builds the new version by itself, usually within a few days.
+
 ## Your data
 
-- All logs, foods, recipes and settings are stored only in Chrome on your phone. Nothing is uploaded to this repository or anywhere else.
+- All logs, foods, recipes and settings are stored only on your phone (in Chrome, or inside the Android app). Nothing is uploaded to this repository or anywhere else. The Android app turns off Android cloud backup for the same reason.
 - The only things sent over the internet are barcode numbers (to Open Food Facts) and search words (to USDA FoodData Central).
 - Use **Settings → Export backup** regularly. Clearing Chrome's site data for this address deletes everything logged.
 - An optional USDA API key can be added in Settings for more searches per hour. It is saved on the phone only, never in this repository.
@@ -80,6 +107,11 @@ To see a new home screen icon, remove BiteWise from the home screen and add it a
 
 - **Open Food Facts** (openfoodfacts.org): barcode product data, a free database anyone can edit, so some products may have errors. Use **Fix nutrition values** in the app to correct them.
 - **USDA FoodData Central** (fdc.nal.usda.gov): nutrition data for plain foods, per 100 g.
+
+## License
+
+BiteWise is free software under the GNU General Public License, version 3 or later. See [LICENSE](LICENSE).
+The files in `vendor/` keep their own licenses: html5-qrcode is Apache-2.0 and the Archivo font is SIL OFL 1.1.
 
 ## Disclaimer
 

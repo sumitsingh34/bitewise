@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Match the dark-mode paper and bar colours in index.html -->
+    <color name="paper">#1E1A17</color>
+    <color name="bar">#26211D</color>
+</resources>

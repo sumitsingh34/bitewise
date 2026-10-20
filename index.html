@@ -8,11 +8,15 @@
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 36 36' fill='%231F2410' stroke='%231F2410' stroke-width='0'><rect x='-2' y='-2' width='36' height='36' rx='7' fill='%239DB04A' stroke-width='0'/><circle cx='12' cy='8.5' r='5'/><path d='M2 31c0-8.5 4.3-13.5 10-13.5s10 5 10 13.5z'/><path d='M18.5 20.5l7-7' stroke-width='3.2' stroke-linecap='round' fill='none'/><path d='M27 30V9M24.5 2.5v4.2a2.5 2.5 0 0 0 5 0V2.5M27 2.5v4' stroke-width='2' stroke-linecap='round' fill='none'/></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+<script src="vendor/html5-qrcode/html5-qrcode.min.js"></script>
 <style>
+/* Archivo variable font (SIL OFL 1.1), kept in vendor/archivo so nothing loads from Google */
+@font-face{font-family:"Archivo";font-style:normal;font-display:swap;font-weight:100 900;font-stretch:62% 125%;
+  src:url(vendor/archivo/archivo-latin-ext-wdth-normal.woff2) format("woff2-variations");
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Archivo";font-style:normal;font-display:swap;font-weight:100 900;font-stretch:62% 125%;
+  src:url(vendor/archivo/archivo-latin-wdth-normal.woff2) format("woff2-variations");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 :root{
   --paper:#FBF8F4; --ink:#3A302A; --muted:#7D7168; --rule:#E3D8CC; --rule2:#CDBFB1; --soft:#F0E8DF; --bar:#FFFFFF; --water:#2E9CAB; --pro-bg:#E3EEF8; --pro:#2F5E86; --carb-bg:#F5ECDA; --carb:#86652A; --fat-bg:#FBE3DC; --fat:#A13F2A; --pro-bar:#5B95C9; --carb-bar:#CDAE6E; --fat-bar:#E5836B;
   --accent:#9DB04A; --accent-ink:#56631A; --accent-deep:#6E7F24; --black:#1F2410; --tomato:#C0392B; --field:#FFFFFF;
@@ -1036,7 +1040,10 @@ async function startScan(){
   if (!window.isSecureContext){ status.textContent = "Camera needs an https:// address. Type the barcode instead."; status.className = "status err"; return; }
   try {
     const F = Html5QrcodeSupportedFormats;
-    scanner = new Html5Qrcode("reader", { formatsToSupport:[F.EAN_13,F.EAN_8,F.UPC_A,F.UPC_E], experimentalFeatures:{ useBarCodeDetectorIfSupported:true }, verbose:false });
+    // The Android app uses the library's own decoder: the WebView's built-in BarcodeDetector
+    // needs Google Play Services and crashes the app on phones without it.
+    const native = !window.BiteWiseAndroid;
+    scanner = new Html5Qrcode("reader", { formatsToSupport:[F.EAN_13,F.EAN_8,F.UPC_A,F.UPC_E], useBarCodeDetectorIfSupported:native, experimentalFeatures:{ useBarCodeDetectorIfSupported:native }, verbose:false });
     scanBusy = false;
     await scanner.start({ facingMode:"environment" }, { fps:10, qrbox:(w,h) => ({ width:Math.min(280, w*0.85), height:Math.min(150, h*0.6) }) },
       code => { if (scanBusy) return; scanBusy = true; if (navigator.vibrate) navigator.vibrate(60); stopScan(); handleCode(code); }, () => {});
@@ -1314,7 +1321,9 @@ function renderSettings(){
     <button class="primary" id="sSave">Save settings</button>
 
     <h2 class="page" style="margin-top:34px">Your data</h2>
-    <p class="note">Everything is stored only on this phone, in this browser. Export a backup now and then so you don't lose it if browser data gets cleared.</p>
+    <p class="note">${window.BiteWiseAndroid
+      ? "Everything is stored only on this phone, in this app. Export a backup now and then so you don't lose it if the app's data gets cleared or the app is uninstalled."
+      : "Everything is stored only on this phone, in this browser. Export a backup now and then so you don't lose it if browser data gets cleared."}</p>
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
       <button class="secondary" id="exp">Export backup</button>
       <button class="secondary" id="imp">Import backup</button>
@@ -1322,7 +1331,7 @@ function renderSettings(){
       <button class="secondary danger" id="wipe">Delete all data</button>
     </div>
     <p class="note" style="margin-top:28px">Barcode data from Open Food Facts (openfoodfacts.org). Food search data from USDA FoodData Central (fdc.nal.usda.gov).</p>
-    <p class="note">BiteWise version 24</p>`;
+    <p class="note">BiteWise version 25</p>`;
   const mp = () => ({ p:parseFloat($("#mpP").value)||0, c:parseFloat($("#mpC").value)||0, f:parseFloat($("#mpF").value)||0 });
   const showMacros = () => {
     const m = mp(), total = m.p + m.c + m.f, g = parseFloat($("#sGoal").value) || 0;
@@ -1356,6 +1365,8 @@ function renderSettings(){
     S.settings.goal = g; S.settings.weight = w; S.settings.usdaKey = $("#sKey").value.trim(); save(); toast("Settings saved");
   };
   $("#exp").onclick = () => {
+    // The Android app can't save blob downloads, so it asks the phone where to save the file instead.
+    if (window.BiteWiseAndroid){ BiteWiseAndroid.saveFile(`bitewise-backup-${todayKey()}.json`, JSON.stringify(S, null, 1)); return; }
     const blob = new Blob([JSON.stringify(S, null, 1)], { type:"application/json" });
     const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `bitewise-backup-${todayKey()}.json`;
     document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
@@ -1381,7 +1392,19 @@ function renderSettings(){
 /* ---------- boot ---------- */
 document.querySelectorAll("nav.tabs button").forEach(b => b.onclick = () => { tab = b.dataset.tab; detail = null; backStack = []; if (tab === "today") cur = cur || todayKey(); render(); window.scrollTo(0,0); });
 render();
-if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
+// The Android app ships these files inside the app, so it doesn't need the offline service worker.
+if ("serviceWorker" in navigator && !window.BiteWiseAndroid) navigator.serviceWorker.register("sw.js").catch(() => {});
+
+// Android back button (Android app only): close what's open, step back, then go to Today.
+// Returns false when there's nothing left to close, so the app can exit.
+function androidBack(){
+  const cf = document.getElementById("confirm");
+  if (cf.open){ cf.close(); return true; }   // its close handler counts this as Cancel
+  if (sheet.open){ pick ? pick.cancel() : closeSheet(); return true; }
+  if (detail){ detail = backStack.pop() || null; render(); window.scrollTo(0,0); return true; }
+  if (tab !== "today"){ tab = "today"; cur = cur || todayKey(); render(); window.scrollTo(0,0); return true; }
+  return false;
+}
 </script>
 </body>
 </html>

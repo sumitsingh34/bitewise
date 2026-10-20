@@ -1,0 +1,4 @@
+First release on F-Droid.
+
+* Barcode scanner and fonts now ship inside the app, so nothing loads from Google or CDNs
+* Export and import backups with the phone's file picker

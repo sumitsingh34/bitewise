@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Same drawing as the favicon in index.html, centred in the adaptive icon's safe zone -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <group
+        android:scaleX="1.4"
+        android:scaleY="1.4"
+        android:translateX="31.95"
+        android:translateY="30.55">
+        <path
+            android:fillColor="#1F2410"
+            android:pathData="M7,8.5a5,5 0,1 0,10 0a5,5 0,1 0,-10 0z" />
+        <path
+            android:fillColor="#1F2410"
+            android:pathData="M2,31c0,-8.5 4.3,-13.5 10,-13.5s10,5 10,13.5z" />
+        <path
+            android:pathData="M18.5,20.5l7,-7"
+            android:strokeColor="#1F2410"
+            android:strokeLineCap="round"
+            android:strokeWidth="3.2" />
+        <path
+            android:pathData="M27,30V9M24.5,2.5v4.2a2.5,2.5 0,0 0,5 0V2.5M27,2.5v4"
+            android:strokeColor="#1F2410"
+            android:strokeLineCap="round"
+            android:strokeWidth="2" />
+    </group>
+</vector>

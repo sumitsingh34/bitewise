@@ -1,0 +1,39 @@
+<p>A simple, personal calorie and nutrition tracker for meals, exercise, water and weight. No accounts, no ads, no AI. Everything you log stays on your phone.</p>
+
+<p><b>Food</b></p>
+<ul>
+<li>Scan a product's barcode with the camera (data from Open Food Facts)</li>
+<li>Search plain foods like rice, carrot or lentils (data from USDA FoodData Central)</li>
+<li>Enter foods by hand, or quick-add just the calories</li>
+<li>My foods with a Recent list, so repeat foods take one tap</li>
+<li>Home recipes: build a dish from its ingredients once, then log it by the serving</li>
+<li>Copy yesterday's meal in one tap</li>
+<li>Fix wrong nutrition values, edit or remove any logged item</li>
+</ul>
+
+<p><b>Nutrition</b></p>
+<ul>
+<li>Calories, protein, carbs, fat, fiber, sugar, saturated fat and sodium</li>
+<li>Daily targets for protein, carbs and fat from your calorie goal and chosen % split</li>
+<li>Breakdown screens showing where calories come from, for each meal and the whole day</li>
+<li>Optional: exercise calories added to the day's budget and macro targets</li>
+</ul>
+
+<p><b>Exercise, water and weight</b></p>
+<ul>
+<li>Log exercise by activity and minutes, with calories estimated from your weight</li>
+<li>Water tracker in glasses (250 ml each)</li>
+<li>Weight log in kg or lb, with a trend chart</li>
+</ul>
+
+<p><b>History</b></p>
+<ul>
+<li>Calories chart as bars or a line, for 7 days up to 3 years or all time</li>
+<li>Weekly and long-term averages for calories, protein, carbs and fat</li>
+<li>Calendar to jump to any day</li>
+</ul>
+
+<p><b>Privacy</b></p>
+<p>There's no account and no tracking. The only things sent over the internet are barcode numbers (to Open Food Facts) and search words (to USDA FoodData Central). Everything else works offline. Use Settings → Export backup to keep a copy of your data, or to move it from the BiteWise web app.</p>
+
+<p>BiteWise is a personal tracking tool, not medical or nutrition advice. Calorie and exercise numbers are estimates.</p>

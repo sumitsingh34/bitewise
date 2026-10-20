@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Match the paper and bar colours in index.html (CSS variables "paper" and "bar") -->
+    <color name="paper">#FBF8F4</color>
+    <color name="bar">#FFFFFF</color>
+    <color name="icon_background">#9DB04A</color>
+</resources>

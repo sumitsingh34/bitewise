@@ -1,0 +1,4 @@
+# Keep LF line endings on every platform, so an APK built on Windows contains the same
+# bytes as F-Droid's Linux build (needed for reproducible builds).
+* text=auto eol=lf
+*.bat text eol=crlf
