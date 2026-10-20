@@ -14,7 +14,7 @@ Repo: https://github.com/sumitsingh34/bitewise.git
 Builds:
   - versionName: '25'
     versionCode: 25
-    commit: v25
+    commit: ba8c3c1eded2ac1da1c3847433dd5169b84c9136
     subdir: android/app
     gradle:
       - yes
